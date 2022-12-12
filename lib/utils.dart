@@ -40,7 +40,11 @@ String textWhatInterest = "What interests you most about DR. MAGZ?";
 String textContinue = "Continue";
 String textSkip = "Skip";
 
-String helloUser = "Hello, ${user.userName}!";
+String helloUser() {
+  return "Hello, ${user.userName}!";
+}
+
+// String helloUser = "Hello, ${user.userName}!";
 String whatDidRead = "What did you read today?";
 String textProfile = "Profile";
 String textAccountSetting = "Account Settings";
@@ -57,6 +61,7 @@ String textTakePicture = "Take Picture";
 String textSubmit = "Submit";
 String textRemovePicture = "Remove Picture";
 String textScrollUp = "Scroll Up to Full video";
+String textProcessingData = "Processing Data";
 
 Color purple = Color(0xff593575);
 Color purpleShade800 = Color(0xff1D214E);

@@ -41,6 +41,9 @@ class _HomescreenState extends State<Homescreen> {
   @override
   void initState() {
     super.initState();
+    setState(() {
+      helloUser;
+    });
     _scrollController.addListener(_scrollListener);
     if (widget.isMount) {
       setState(() {
@@ -226,7 +229,7 @@ class _HomescreenState extends State<Homescreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              helloUser,
+                              helloUser(),
                               style: GoogleFonts.poppins(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,

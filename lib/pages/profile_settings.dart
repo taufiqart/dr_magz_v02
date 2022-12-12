@@ -412,9 +412,9 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                             user.userEmail = txtEmail.text;
                             user.userPass = txtPass.text;
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
+                              SnackBar(
                                   duration: Duration(milliseconds: 1500),
-                                  content: Text('Processing Data')),
+                                  content: Text(textProcessingData)),
                             );
                             Future.delayed(
                               Duration(seconds: 2),
