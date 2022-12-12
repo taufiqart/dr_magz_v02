@@ -42,6 +42,7 @@ String textSkip = "Skip";
 
 String helloUser() {
   return "Hello, ${user.userName}!";
+  // return "Hello, !";
 }
 
 // String helloUser = "Hello, ${user.userName}!";
@@ -62,6 +63,7 @@ String textSubmit = "Submit";
 String textRemovePicture = "Remove Picture";
 String textScrollUp = "Scroll Up to Full video";
 String textProcessingData = "Processing Data";
+String textRegister = "Register";
 
 Color purple = Color(0xff593575);
 Color purpleShade800 = Color(0xff1D214E);

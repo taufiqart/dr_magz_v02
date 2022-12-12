@@ -41,9 +41,6 @@ class _HomescreenState extends State<Homescreen> {
   @override
   void initState() {
     super.initState();
-    setState(() {
-      helloUser;
-    });
     _scrollController.addListener(_scrollListener);
     if (widget.isMount) {
       setState(() {
@@ -108,10 +105,10 @@ class _HomescreenState extends State<Homescreen> {
                   padding: EdgeInsets.only(bottom: 80),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                      alignment: Alignment.bottomCenter,
-                      image: AssetImage(bgBottom),
-                      opacity: 0.5,
-                    ),
+                        alignment: Alignment.bottomCenter,
+                        image: AssetImage(bgBottom),
+                        opacity: 0.4,
+                        fit: BoxFit.fitWidth),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,

@@ -41,7 +41,7 @@ class _RegisterState extends State<Register> {
                 width: MediaQuery.of(context).size.width,
                 child: Padding(
                   padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 35),
+                      const EdgeInsets.symmetric(vertical: 30, horizontal: 35),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -229,6 +229,11 @@ class _RegisterState extends State<Register> {
                         onTap: () {
                           print(_formKey.currentState!.validate());
                           if (_formKey.currentState!.validate()) {
+                            UserPreference().setUser(
+                              name: txtName.text,
+                              email: txtEmail.text,
+                              pass: txtPass.text,
+                            );
                             user.userName = txtName.text;
                             user.userEmail = txtEmail.text;
                             user.userPass = txtPass.text;
@@ -273,7 +278,7 @@ class _RegisterState extends State<Register> {
                           ),
                           alignment: Alignment.center,
                           child: Text(
-                            textContinue,
+                            textRegister,
                             style: GoogleFonts.poppins(
                               color: textColor.withOpacity(0.9),
                               fontSize: 15,

@@ -2,6 +2,7 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dr_magz/get_mode.dart';
 import 'package:dr_magz/models/artikel_model.dart';
+import 'package:dr_magz/models/user_model.dart';
 import 'package:dr_magz/music.dart';
 import 'package:dr_magz/pages.dart';
 import 'package:dr_magz/pages/artikel_view.dart';
@@ -23,10 +24,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // String storageLocation = 'E:/fast';
-  String storageLocation = (await getApplicationDocumentsDirectory()).path;
-  await FastCachedImageConfig.init(path: storageLocation);
   runApp(const MyApp());
-  await FastCachedImageConfig.init(path: storageLocation);
 }
 
 class MyApp extends StatefulWidget {
@@ -39,6 +37,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   DarkThemeProvider themeChangeProvider = new DarkThemeProvider();
   Brightness brightness = SchedulerBinding.instance.window.platformBrightness;
+  UserPreference userPref = new UserPreference();
+  UserModel users = user;
   late bool isDarkMode;
   @override
   void initState() {
@@ -47,6 +47,12 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     isDarkMode = brightness == Brightness.dark;
     WidgetsBinding.instance.addObserver(this);
     getCurrentAppTheme();
+    getUser();
+    print(users.userName);
+  }
+
+  void getUser() async {
+    users = await userPref.getUser();
   }
 
   void getCurrentAppTheme() async {
@@ -64,23 +70,51 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           MusicPreference().setMusic(true);
           playMusic();
         }
+        userPref.setUser(
+          email: user.userName,
+          name: user.userName,
+          pass: user.userPass,
+          userPic: user.userPic,
+          urlType: user.urlType,
+        );
         print("app in resumed");
         break;
       case AppLifecycleState.inactive:
-        print("app in inactive");
         if (latestMusic) {
           MusicPreference().setMusic(false);
           playMusic();
         }
+        userPref.setUser(
+          email: user.userName,
+          name: user.userName,
+          pass: user.userPass,
+          userPic: user.userPic,
+          urlType: user.urlType,
+        );
+        print("app in inactive");
         break;
       case AppLifecycleState.paused:
         if (latestMusic) {
           MusicPreference().setMusic(false);
           playMusic();
         }
+        userPref.setUser(
+          email: user.userName,
+          name: user.userName,
+          pass: user.userPass,
+          userPic: user.userPic,
+          urlType: user.urlType,
+        );
         print("app in paused");
         break;
       case AppLifecycleState.detached:
+        userPref.setUser(
+          email: user.userName,
+          name: user.userName,
+          pass: user.userPass,
+          userPic: user.userPic,
+          urlType: user.urlType,
+        );
         print("app in detached");
         break;
     }

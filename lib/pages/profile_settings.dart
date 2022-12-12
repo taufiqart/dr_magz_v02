@@ -91,6 +91,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               onTap: (() {
                 print("from gallery");
                 pickMedia(ImageSource.gallery);
+                user.userPic = imagePath as String;
                 user.urlType = UrlType.file;
                 Navigator.pop(context);
               }),
@@ -116,7 +117,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               onTap: () {
                 print("Take picture");
                 pickMedia(ImageSource.camera);
-                user.userPic = defaultUserPic;
+                user.userPic = imagePath as String;
                 Navigator.pop(context);
                 user.urlType = UrlType.file;
               },

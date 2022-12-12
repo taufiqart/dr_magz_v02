@@ -90,7 +90,8 @@ class _FavouriteState extends State<Favourite> {
                       image: DecorationImage(
                         image: AssetImage(bgBottom),
                         alignment: Alignment.bottomCenter,
-                        opacity: 0.5,
+                        opacity: 0.4,
+                        fit: BoxFit.fitWidth,
                       ),
                     ),
                     child: Column(
