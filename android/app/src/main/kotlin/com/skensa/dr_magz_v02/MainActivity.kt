@@ -1,4 +1,4 @@
-package com.example.dr_magz_v02
+package com.skensa.dr_magz
 
 import io.flutter.embedding.android.FlutterActivity
 

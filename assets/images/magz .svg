@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="324.644mm" height="63.7593mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 3498.28 687.05"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <font id="FontID0" horiz-adv-x="755" font-variant="normal" style="fill-rule:nonzero" font-weight="800">
+	<font-face 
+		font-family="Poppins ExtraBold">
+		<font-face-src>
+			<font-face-name name="Poppins ExtraBold"/>
+		</font-face-src>
+	</font-face>
+   <missing-glyph><path d="M0 0z"/></missing-glyph>
+   <glyph unicode="A" horiz-adv-x="755" d="M540.001 0l206.999 0 -256 705 -225.999 0 -257.001 -705 206 0 37.9994 115 250 0 38.0005 -115zm-87.0002 265.001l-151 0 75.0002 228 75.9999 -228z"/>
+   <glyph unicode="G" horiz-adv-x="756" d="M389 712c-216.001,0 -357,-148 -357,-358 0,-211 142,-359 358,-359 184,0 292.999,113.999 335,216.999l0 190 -366 0 0 -141 197.001 0c-29.0008,-61.0008 -79.0002,-93.0007 -147,-93.0007 -116,0 -178,64.9996 -178,186 0,108 59.9999,177 159,177 53.9994,0 93.9993,-20.9997 116,-57.9994l211 0c-28,147 -150,239 -328,239z"/>
+   <glyph unicode="M" horiz-adv-x="935" d="M55.9999 0l196 0 0 392 134 -392 164 0 133 389 0 -389 196.001 0 0 705 -236.001 0 -173 -458 -177 458 -237.001 0 0 -705z"/>
+  </font>
+  <style type="text/css">
+   <![CDATA[
+    @font-face { font-family:"Poppins ExtraBold";font-variant:normal;font-weight:800;src:url("#FontID0") format(svg)}
+    .fil0 {fill:#332F77}
+    .fil1 {fill:#332F77}
+    .fil2 {fill:#3687E9}
+    .fnt0 {font-weight:800;font-size:958.23px;font-family:'Poppins ExtraBold'}
+   ]]>
+  </style>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <g id="_2416872174176">
+   <g transform="matrix(1.10333 0 0 1 -17968.7 88.3856)">
+    <text x="16232.22" y="593.88"  class="fil0 fnt0">M</text>
+   </g>
+   <g transform="matrix(1.10333 0 0 1 -16963.2 88.3856)">
+    <text x="16232.22" y="593.88"  class="fil0 fnt0">A</text>
+   </g>
+   <g transform="matrix(1.10333 0 0 1 -16145.9 88.3856)">
+    <text x="16232.22" y="593.88"  class="fil1 fnt0">G</text>
+   </g>
+   <g>
+    <polygon class="fil2" points="2645.96,6.7 3091.52,6.7 2911.92,223.15 "/>
+    <polygon class="fil2" points="3498.28,682.26 3052.72,682.26 3232.33,465.82 "/>
+    <polygon class="fil2" points="3173.49,6.7 3304.82,6.7 2828.55,574.04 2924.85,574.04 3322.33,114.93 3441.4,114.93 2968.63,682.26 2611.42,682.26 "/>
+   </g>
+  </g>
+ </g>
+</svg>
