@@ -1,16 +1,20 @@
-import 'dart:io';
+import 'dart:io' as Io;
+import 'dart:ui';
 
 import 'package:dr_magz/backgrounds/bg_2.dart';
 import 'package:dr_magz/models/user_model.dart';
 import 'package:dr_magz/pages.dart';
+import 'package:dr_magz/preferences.dart';
 import 'package:dr_magz/theme_data.dart';
 import 'package:dr_magz/provider.dart';
 import 'package:dr_magz/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:video_thumbnail/video_thumbnail.dart';
+import 'package:image/image.dart' as IM;
 
 class ProfileSettings extends StatefulWidget {
   const ProfileSettings({super.key});
@@ -32,6 +36,23 @@ class _ProfileSettingsState extends State<ProfileSettings> {
     txtName.text = user.userName;
     txtEmail.text = user.userEmail;
     txtPass.text = user.userPass;
+    getUser();
+  }
+
+  Future<Io.File?> saveImage(Io.File file) async {
+    try {
+      var dir = await getExternalStorageDirectory();
+      var testdir = await new Io.Directory('${dir!.path}/profile')
+          .create(recursive: true);
+      IM.Image image = IM.decodeImage(file.readAsBytesSync()) as IM.Image;
+      return new Io.File(
+          '${testdir.path}/${DateTime.now().toUtc().toIso8601String()}.png')
+        ..writeAsBytesSync(IM.encodePng(image));
+    } catch (e) {
+      print(e);
+      imagePath = e as String;
+      return null;
+    }
   }
 
   final MediaType _mediaType = MediaType.image;
@@ -45,6 +66,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
     }
     if (file != null) {
       imagePath = file.path;
+      saveImage(Io.File(file.path));
       if (_mediaType == MediaType.video) {
         imagePath = await VideoThumbnail.thumbnailFile(
             video: file.path,
@@ -92,13 +114,17 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 print("from gallery");
                 pickMedia(ImageSource.gallery);
                 user.userPic = imagePath as String;
+                user.userPic = imagePath as String;
+                user.userPic = imagePath as String;
+                user.urlType = UrlType.file;
+                user.urlType = UrlType.file;
                 user.urlType = UrlType.file;
                 Navigator.pop(context);
               }),
               title: Text(
                 textFromGallery,
                 style: GoogleFonts.poppins(
-                  color: darkTheme ? textColor : purple,
+                  color: textColor,
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                 ),
@@ -106,12 +132,12 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               minLeadingWidth: 5,
               leading: Icon(
                 Icons.image_outlined,
-                color: darkTheme ? textColor : purple,
+                color: textColor,
               ),
             ),
             Divider(
               height: 5,
-              color: darkTheme ? textColor : purple,
+              color: textColor,
             ),
             ListTile(
               onTap: () {
@@ -120,11 +146,19 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 user.userPic = imagePath as String;
                 Navigator.pop(context);
                 user.urlType = UrlType.file;
+                userPref.setUser(
+                  email: user.userEmail,
+                  name: user.userName,
+                  pass: user.userPass,
+                  userPic: user.userPic,
+                  urlType: user.urlType,
+                );
               },
               title: Text(
                 textTakePicture,
                 style: GoogleFonts.poppins(
-                  color: darkTheme ? textColor : purple,
+                  // color: darkTheme ? textColor : purple,
+                  color: textColor,
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                 ),
@@ -132,12 +166,13 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               minLeadingWidth: 5,
               leading: Icon(
                 Icons.camera_alt,
-                color: darkTheme ? textColor : purple,
+                // color: darkTheme ? textColor : purple,
+                color: textColor,
               ),
             ),
             Divider(
               height: 5,
-              color: darkTheme ? textColor : purple,
+              color: textColor,
             ),
             ListTile(
               onTap: () {
@@ -146,11 +181,18 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                 Navigator.pop(context);
                 user.userPic = defaultUserPic;
                 user.urlType = UrlType.asset;
+                userPref.setUser(
+                  email: user.userEmail,
+                  name: user.userName,
+                  pass: user.userPass,
+                  userPic: user.userPic,
+                  urlType: user.urlType,
+                );
               },
               title: Text(
                 textRemovePicture,
                 style: GoogleFonts.poppins(
-                  color: darkTheme ? textColor : purple,
+                  color: textColor,
                   fontSize: 13,
                   fontWeight: FontWeight.w500,
                 ),
@@ -158,17 +200,36 @@ class _ProfileSettingsState extends State<ProfileSettings> {
               minLeadingWidth: 5,
               leading: Icon(
                 Icons.delete,
-                color: darkTheme ? textColor : purple,
+                color: textColor,
               ),
             ),
             Divider(
               height: 5,
-              color: darkTheme ? textColor : purple,
+              color: textColor,
             ),
           ],
         ),
       ),
     );
+  }
+
+  UserPreference userPref = new UserPreference();
+  UserModel users = user;
+
+  void getUser() async {
+    users = await userPref.getUser();
+  }
+
+  @override
+  void dispose() {
+    userPref.setUser(
+      email: user.userEmail,
+      name: user.userName,
+      pass: user.userPass,
+      userPic: user.userPic,
+      urlType: user.urlType,
+    );
+    super.dispose();
   }
 
   @override
@@ -225,9 +286,8 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                                         ? NetworkImage(
                                             user.userPic,
                                           )
-                                        : FileImage(
-                                            File(user.userPic),
-                                          ) as ImageProvider,
+                                        : FileImage(Io.File(user.userPic))
+                                            as ImageProvider,
                                 fit: BoxFit.cover,
                               ),
                             ),
@@ -420,6 +480,7 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                             Future.delayed(
                               Duration(seconds: 2),
                               () {
+                                Navigator.pop(context, "refresh");
                                 Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(

@@ -49,6 +49,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     getCurrentAppTheme();
     getUser();
     print(users.userName);
+    print(users.userPic);
   }
 
   void getUser() async {
@@ -64,6 +65,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   Future<void> didChangeAppLifecycleState(AppLifecycleState state) async {
     latestMusic = await MusicPreference().getMusic();
+
     switch (state) {
       case AppLifecycleState.resumed:
         if (latestMusic) {
@@ -123,6 +125,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    userPref.setUser(
+      email: user.userName,
+      name: user.userName,
+      pass: user.userPass,
+      userPic: user.userPic,
+      urlType: user.urlType,
+    );
     super.dispose();
   }
 
@@ -139,7 +148,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           });
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Flutter Demo',
+            title: 'DR. MAGZ',
             theme: Styles.themeData(themeChangeProvider.darkTheme, context),
             // home: SplashScreen(),
             // home: Homescreen(),

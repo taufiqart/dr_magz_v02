@@ -241,7 +241,7 @@ class _ArtikelViewState extends State<ArtikelView> {
                                 ? Icons.favorite
                                 : Icons.favorite_outline,
                             size: 20,
-                            color: textColor,
+                            color: widget.article.liked ? likeColor : textColor,
                           ),
                         ),
                       ),

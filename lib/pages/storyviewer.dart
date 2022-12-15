@@ -16,7 +16,7 @@ class StoryViewer extends StatefulWidget {
 
 class _StoryViewerState extends State<StoryViewer> {
   late Timer _timer;
-  late Duration duration = Duration(milliseconds: 3);
+  late Duration duration = Duration(milliseconds: 4);
   double percent = 0;
   late int _currentIndex;
   late PageController _pageController;
@@ -75,6 +75,9 @@ class _StoryViewerState extends State<StoryViewer> {
         color: bottomBarDarkColor,
       ),
       child: GestureDetector(
+        onTapCancel: () {
+          startTimer();
+        },
         onTapDown: (details) {
           var _position = (context.findRenderObject() as RenderBox)
               .globalToLocal(details.globalPosition);
@@ -85,6 +88,8 @@ class _StoryViewerState extends State<StoryViewer> {
             } else if (_position.dx >=
                 MediaQuery.of(context).size.width - 108) {
               next();
+            } else {
+              _timer.cancel();
             }
           }
         },
@@ -104,7 +109,7 @@ class _StoryViewerState extends State<StoryViewer> {
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               child: StoryView(
-                duration: Duration(milliseconds: 3),
+                duration: Duration(milliseconds: 4),
                 story: stories[index],
               ),
             );

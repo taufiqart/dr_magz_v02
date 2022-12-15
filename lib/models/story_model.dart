@@ -36,7 +36,7 @@ List<StoryData> stories = <StoryData>[
   ),
   StoryData(
     title: "Tefa",
-    longTitle: "Profmosi Produk",
+    longTitle: "Promosi Produk",
     url:
         "https://www.skensadigimagzcenter.site/dr_magz/images/stories/tefa.png",
     urlType: UrlType.network,

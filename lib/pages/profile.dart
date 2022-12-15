@@ -234,13 +234,17 @@ class _ProfileState extends State<Profile> {
                                                 ),
                                                 TextButton(
                                                   onPressed: () {
-                                                    Navigator.push(
+                                                    var result = Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (context) =>
                                                             ProfileSettings(),
                                                       ),
                                                     );
+
+                                                    if (result == "refresh") {
+                                                      setState(() {});
+                                                    }
                                                   },
                                                   child: Text(
                                                     textAccountSetting,
@@ -280,35 +284,35 @@ class _ProfileState extends State<Profile> {
                                                 blurRadius: 10,
                                                 blurStyle: BlurStyle.outer)
                                           ]),
-                                      child: ClipPath(
-                                        clipBehavior: Clip.antiAlias,
-                                        clipper: SegitigaClipPath(),
-                                        child: Container(
-                                          padding: EdgeInsets.only(
-                                            top: 85,
-                                          ),
-                                          height: 130,
-                                          width: 90,
-                                          alignment: Alignment.center,
-                                          decoration: BoxDecoration(
-                                            color:
-                                                Colors.white.withOpacity(0.5),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black
-                                                    .withOpacity(0.2),
-                                              )
-                                            ],
-                                          ),
-                                          // child: Icon(
-                                          //   Icons.note_alt_outlined,
-                                          //   color: darkTheme
-                                          //       ? Colors.white
-                                          //       : purple,
-                                          //   size: 25,
-                                          // ),
-                                        ),
-                                      ),
+                                      // child: ClipPath(
+                                      //   clipBehavior: Clip.antiAlias,
+                                      //   clipper: SegitigaClipPath(),
+                                      //   child: Container(
+                                      //     padding: EdgeInsets.only(
+                                      //       top: 85,
+                                      //     ),
+                                      //     height: 130,
+                                      //     width: 90,
+                                      //     alignment: Alignment.center,
+                                      //     decoration: BoxDecoration(
+                                      //       color:
+                                      //           Colors.white.withOpacity(0.5),
+                                      //       boxShadow: [
+                                      //         BoxShadow(
+                                      //           color: Colors.black
+                                      //               .withOpacity(0.2),
+                                      //         )
+                                      //       ],
+                                      //     ),
+                                      // child: Icon(
+                                      //   Icons.note_alt_outlined,
+                                      //   color: darkTheme
+                                      //       ? Colors.white
+                                      //       : purple,
+                                      //   size: 25,
+                                      // ),
+                                      // ),
+                                      // ),
                                     ),
                                   )
                                 ],

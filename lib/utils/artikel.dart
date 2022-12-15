@@ -144,7 +144,9 @@ class _ArtikelButtonState extends State<ArtikelButton> {
                                           ? Icons.favorite
                                           : Icons.favorite_outline,
                                       size: 20,
-                                      color: textColor,
+                                      color: widget.article.liked
+                                          ? likeColor
+                                          : textColor,
                                     ),
                                   )
                                 ],

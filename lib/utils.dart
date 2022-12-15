@@ -27,7 +27,7 @@ Color textColor = Colors.white;
 
 String newArticleText = "New Articles";
 String newMagazineText = "Today's magazine";
-String favouriteArticleText = "Favourite";
+String favouriteArticleText = "Favorite";
 String libraryText = "Library";
 String textGetStarted = "Get Started";
 
@@ -87,6 +87,7 @@ Color thirdColor = new Color.fromARGB(255, 12, 179, 188);
 Color fourColor = new Color.fromARGB(255, 7, 18, 36);
 Color fiveColor = new Color.fromARGB(255, 9, 25, 51);
 Color sixColor = new Color.fromARGB(255, 41, 26, 81);
+Color likeColor = Color(0xffE43237);
 
 // validator
 String english = " must be required";

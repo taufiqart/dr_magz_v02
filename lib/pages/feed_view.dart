@@ -297,7 +297,7 @@ class _FeedViewState extends State<FeedView> {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    textProfileSettings,
+                                    textShortVideo,
                                     style: GoogleFonts.poppins(
                                       color: textColor,
                                       fontWeight: FontWeight.w500,

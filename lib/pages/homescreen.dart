@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 // import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dr_magz/backgrounds/bg_2.dart';
@@ -9,6 +10,7 @@ import 'package:dr_magz/models/story_model.dart';
 import 'package:dr_magz/models/user_model.dart';
 import 'package:dr_magz/pages.dart';
 import 'package:dr_magz/pages/settings.dart';
+import 'package:dr_magz/preferences.dart';
 import 'package:dr_magz/provider.dart';
 import 'package:dr_magz/utils.dart';
 import 'package:dr_magz/utils/artikel.dart';
@@ -40,6 +42,13 @@ class _HomescreenState extends State<Homescreen> {
   // String storageLocation = (await getApplicationDocumentsDirectory()).path;
   @override
   void initState() {
+    UserPreference().setUser(
+      email: user.userName,
+      name: user.userName,
+      pass: user.userPass,
+      userPic: user.userPic,
+      urlType: user.urlType,
+    );
     super.initState();
     _scrollController.addListener(_scrollListener);
     if (widget.isMount) {
@@ -63,6 +72,13 @@ class _HomescreenState extends State<Homescreen> {
   }
 
   _scrollListener() {
+    UserPreference().setUser(
+      email: user.userName,
+      name: user.userName,
+      pass: user.userPass,
+      userPic: user.userPic,
+      urlType: user.urlType,
+    );
     setState(() {
       if (_scrollController.position.userScrollDirection ==
           ScrollDirection.forward) {
@@ -105,10 +121,11 @@ class _HomescreenState extends State<Homescreen> {
                   padding: EdgeInsets.only(bottom: 80),
                   decoration: BoxDecoration(
                     image: DecorationImage(
-                        alignment: Alignment.bottomCenter,
-                        image: AssetImage(bgBottom),
-                        opacity: 0.4,
-                        fit: BoxFit.fitWidth),
+                      alignment: Alignment.bottomCenter,
+                      image: AssetImage(bgBottom),
+                      opacity: 0.4,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -145,24 +162,25 @@ class _HomescreenState extends State<Homescreen> {
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       Container(
-                                          height: 300,
-                                          width:
-                                              MediaQuery.of(context).size.width,
-                                          decoration: BoxDecoration(
-                                            color: Colors.transparent,
-                                            image: DecorationImage(
-                                              image: (homeCarousel[index]
-                                                          .urlType ==
-                                                      UrlType.asset)
-                                                  ? AssetImage(
-                                                      homeCarousel[index].url)
-                                                  : CachedNetworkImageProvider(
-                                                          homeCarousel[index]
-                                                              .url)
-                                                      as ImageProvider,
-                                              fit: BoxFit.cover,
-                                            ),
-                                          )),
+                                        height: 300,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          color: Colors.transparent,
+                                          image: DecorationImage(
+                                            image: (homeCarousel[index]
+                                                        .urlType ==
+                                                    UrlType.asset)
+                                                ? AssetImage(
+                                                    homeCarousel[index].url,
+                                                  )
+                                                : CachedNetworkImageProvider(
+                                                    homeCarousel[index].url,
+                                                  ) as ImageProvider,
+                                            fit: BoxFit.cover,
+                                          ),
+                                        ),
+                                      ),
                                       // clipBehavior: Clip.antiAlias,
                                       //   child: (homeCarousel[index].urlType ==
                                       //           UrlType.asset)
@@ -228,10 +246,11 @@ class _HomescreenState extends State<Homescreen> {
                             Text(
                               helloUser(),
                               style: GoogleFonts.poppins(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                  color: darkTheme ? textColor : purple,
-                                  height: 1),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: darkTheme ? textColor : purple,
+                                height: 1,
+                              ),
                             ),
                             SizedBox(
                               height: 10,
@@ -263,7 +282,11 @@ class _HomescreenState extends State<Homescreen> {
                                 right: index == stories.length - 1 ? 10 : 0,
                               ),
                               child: StoryButton(
-                                  stories[index], context, darkTheme, index),
+                                stories[index],
+                                context,
+                                darkTheme,
+                                index,
+                              ),
                             );
                           },
                         ),
@@ -373,10 +396,17 @@ class _HomescreenState extends State<Homescreen> {
                               radius: 16,
                               backgroundColor: Colors.white.withOpacity(0.5),
                               foregroundColor: Colors.white,
-                              child: Icon(
-                                Icons.person,
-                                size: 24,
-                              ),
+                              backgroundImage: user.urlType == UrlType.asset
+                                  ? AssetImage(user.userPic)
+                                  : user.urlType == UrlType.network
+                                      ? NetworkImage(user.userPic)
+                                      : FileImage(
+                                          File(user.userPic),
+                                        ) as ImageProvider,
+                              // child: Icon(
+                              //   Icons.person,
+                              //   size: 24,
+                              // ),
                             ),
                           ),
                           SizedBox(
